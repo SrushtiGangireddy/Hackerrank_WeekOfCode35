@@ -1,0 +1,63 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    static int matrix[][];
+    static int m;
+    static int n;
+    static int k;
+    
+    static void tripleRecursion(int n, int m, int k) {
+       for(int i=0;i<n;i++){
+           for(int j=0;j<n;j++){
+               if(i==0 && j==0){
+                   cond1(i,j);
+               }else if(i==j){
+                   cond2(i,j);
+               }else if(i>j){
+                   cond3(i,j);
+               }else if(i<j){
+                   cond4(i,j);
+               }
+           }
+       }
+        
+       for(int i=0;i<n;i++){
+           for(int j=0;j<n;j++){
+               System.out.print(matrix[i][j]+" ");
+           }
+           System.out.println();
+       } 
+        
+    }
+    
+    static void cond1(int i,int j){
+        matrix[i][j] = m;
+    }
+    
+    static void cond2(int i,int j){
+        matrix[i][j] = matrix[i-1][j-1]+k;
+    }
+    
+    static void cond3(int i,int j){
+        matrix[i][j] = matrix[i-1][j]-1;
+    }
+    
+    static void cond4(int i,int j){
+        matrix[i][j] = matrix[i][j-1]-1;
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        n = in.nextInt();
+        matrix = new int[n][n];
+        m = in.nextInt();
+        k = in.nextInt();
+        tripleRecursion(n, m, k);
+        in.close();
+    }
+}
